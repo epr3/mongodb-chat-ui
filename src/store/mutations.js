@@ -12,5 +12,8 @@ export default {
   },
   [types.RESET_ERROR]: state => {
     state.error = '';
+  },
+  [types.EMIT_EVENT]: (state, payload) => {
+    state.socket.emit(payload.event, payload.body);
   }
 };
