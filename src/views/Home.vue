@@ -1,18 +1,21 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+  <div class="section is-fullheight">
+    <h2 class="title is-centered">Demo Chat</h2>
+    <div class="columns is-centered">
+      <div class="column is-one-third"><user-list /></div>
+      <div class="column is-one-third"><conversation-list /></div>
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
-
+import UserList from '../containers/UserList.vue';
+import ConversationList from '../containers/ConversationList.vue';
 export default {
-  name: "home",
+  name: 'home',
   components: {
-    HelloWorld
+    UserList,
+    ConversationList
   }
 };
 </script>
