@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import UserList from '../containers/UserList.vue';
 import ConversationList from '../containers/ConversationList.vue';
 export default {
@@ -16,6 +17,15 @@ export default {
   components: {
     UserList,
     ConversationList
+  },
+  mounted() {
+    this.getCurrentUser();
+    this.getConversations();
+    this.getUsers();
+  },
+  methods: {
+    ...mapActions('user', ['getCurrentUser', 'getUsers']),
+    ...mapActions('chat', ['getConversations'])
   }
 };
 </script>

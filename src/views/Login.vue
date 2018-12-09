@@ -6,18 +6,10 @@
           <div class="card is-rounded">
             <div class="card-content">
               <h2 class="title has-text-black">Login</h2>
-              <b-input
-                type="email"
-                :value="email"
-                placeholder="Email"
-              />
-              <b-input
-                type="password"
-                :value="password"
-                placeholder="Password"
-              />
+              <b-input type="email" v-model="email" placeholder="Email"/>
+              <b-input type="password" v-model="password" placeholder="Password"/>
               <div class="control">
-                <b-button text="Login" />
+                <b-button text="Login" @click="loginAction" />
               </div>
             </div>
           </div>
@@ -28,6 +20,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 import BInput from '../components/Input.vue';
 import BButton from '../components/Button.vue';
 export default {
@@ -39,6 +33,13 @@ export default {
   components: {
     BInput,
     BButton
+  },
+  methods: {
+    ...mapActions('user', ['login']),
+    loginAction() {
+      const { email, password } = this;
+      this.login({ email, password });
+    }
   }
 };
 </script>

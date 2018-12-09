@@ -18,5 +18,8 @@ export default {
   [types.LOGOUT]: state => {
     state.currentUser = null;
     state.token = '';
+  },
+  [types.CHECK_AUTH]: (state, payload) => {
+    state.token = payload;
   }
 };

@@ -7,6 +7,8 @@ import 'bulma';
 
 Vue.config.productionTip = false;
 
+store.dispatch('user/checkAuth');
+
 new Vue({
   router,
   store,

@@ -1,12 +1,13 @@
 <template>
-  <div class="container">
-    UserList
-  </div>
+  <div class="container">{{ filteredUsers }}</div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 export default {
-  name: 'user-list'
+  name: 'user-list',
+  computed: {
+    ...mapGetters('user', ['filteredUsers'])
+  }
 };
 </script>
-

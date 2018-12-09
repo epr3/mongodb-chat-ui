@@ -17,7 +17,7 @@ const create = (baseURL = 'http://localhost:3000') => {
         !!token &&
         (!config.url.includes('login') || !config.url.includes('register'))
       ) {
-        config.headers.Authorization = `Bearer ${token}`;
+        config.headers.Authorization = token;
       }
       return config;
     },
@@ -26,10 +26,10 @@ const create = (baseURL = 'http://localhost:3000') => {
 
   const postLogin = (email, password) =>
     api.post('/login', { email, password });
-  const postRegister = (email, password) =>
+  const postRegister = (email, password, name) =>
     api.post('/register', { email, password, name });
   const getUsers = () => api.get('/users');
-  const getUser = () => api.get('/users.me');
+  const getUser = () => api.get('/users/me');
   const getConversations = () => api.get('/chat');
   const postConversation = conversationObj =>
     api.post('/chat', conversationObj);
