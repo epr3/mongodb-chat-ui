@@ -9,6 +9,11 @@
               <b-input type="email" v-model="email" placeholder="Email"/>
               <b-input type="password" v-model="password" placeholder="Password"/>
               <div class="control">
+                <a @click="$router.push('/register')">
+                  Create an account?
+                </a>
+              </div>
+              <div class="control">
                 <b-button text="Login" @click="loginAction" />
               </div>
             </div>

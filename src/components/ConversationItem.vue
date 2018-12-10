@@ -2,12 +2,12 @@
   <div class="level">
     <div class="level-left">
       <div class="level-item">
-        <span>Conversation with: User x</span>
+        <span>Conversation: {{ name }}</span>
       </div>
     </div>
     <div class="level-right">
       <div class="level-item">
-        <b-button text="Open" />
+        <b-button text="Open" @click="conversationAction" />
       </div>
     </div>
   </div>
@@ -17,6 +17,16 @@
 import BButton from './Button.vue';
 export default {
   name: 'conversation-item',
+  props: {
+    name: {
+      type: String,
+      required: true
+    },
+    conversationAction: {
+      type: Function,
+      required: true
+    }
+  },
   components: {
     BButton
   }
