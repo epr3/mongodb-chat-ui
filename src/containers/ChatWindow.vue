@@ -35,15 +35,15 @@ export default {
     message: ''
   }),
   props: {
-    conversationId: {
-      type: String
-    },
     recipientId: {
       type: String
     }
   },
   mounted() {
-    if (this.conversationId) this.refreshChat();
+    if (this.currentConversation) {
+      this.refreshChat();
+      this.socket.emit('enter conversation', this.currentConversation);
+    }
     this.socket.on('refresh messages', () => {
       this.refreshChat();
     });
@@ -55,18 +55,18 @@ export default {
   },
   computed: {
     ...mapState(['socket']),
-    ...mapState('chat', ['messages']),
+    ...mapState('chat', ['messages', 'currentConversation']),
     ...mapState('user', ['currentUser'])
   },
   methods: {
     ...mapActions('chat', ['getMessages', 'newConversation', 'newMessage']),
     refreshChat() {
-      this.getMessages(this.conversationId);
+      this.getMessages(this.currentConversation);
     },
     sendMessage() {
-      if (this.conversationId) {
+      if (this.currentConversation) {
         this.newMessage({
-          conversationId: this.conversationId,
+          conversationId: this.currentConversation,
           message: {
             body: this.message,
             author: this.currentUser._id

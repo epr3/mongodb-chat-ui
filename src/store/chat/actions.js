@@ -19,15 +19,10 @@ export const getMessages = async ({ commit }, payload) => {
   try {
     commit(rootTypes.START_LOADING, null, { root: true });
     const response = await API.getMessages(payload);
-    commit(
-      rootTypes.EMIT_EVENT,
-      {
-        event: 'enter conversation',
-        body: payload
-      },
-      { root: true }
-    );
-    commit(types.GET_MESSAGES, response.data);
+    commit(types.GET_MESSAGES, {
+      message: response.data,
+      conversationId: payload
+    });
   } catch (e) {
     console.log(e.message);
   }
@@ -43,7 +38,7 @@ export const newConversation = async ({ commit }, payload) => {
       rootTypes.EMIT_EVENT,
       {
         event: 'enter conversation',
-        body: response.data._id
+        body: response.data.conversationId
       },
       { root: true }
     );
@@ -73,4 +68,8 @@ export const newMessage = async ({ commit }, payload) => {
     console.log(e.message);
   }
   commit(rootTypes.STOP_LOADING, null, { root: true });
+};
+
+export const setCurrentConversation = ({ commit }, payload) => {
+  commit(types.SET_CURRENT_CONVERSATION, payload);
 };
