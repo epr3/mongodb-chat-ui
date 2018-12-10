@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 
 import ConversationItem from '../components/ConversationItem.vue';
 
@@ -23,10 +23,14 @@ export default {
   components: {
     ConversationItem
   },
+  mounted() {
+    this.getConversations();
+  },
   computed: {
     ...mapState('chat', ['conversations'])
   },
   methods: {
+    ...mapActions('chat', ['getConversations']),
     openConversation(id) {
       this.$emit('chat:open', { conversationId: id, type: 'old' });
     }

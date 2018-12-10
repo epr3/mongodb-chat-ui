@@ -38,9 +38,6 @@ export default {
   },
   mounted() {
     this.getCurrentUser();
-    this.getConversations();
-    this.getUsers();
-
     this.socket.on('refresh messages', data => {
       this.conversationId = data;
     });
@@ -49,8 +46,7 @@ export default {
     ...mapState(['socket'])
   },
   methods: {
-    ...mapActions('user', ['getCurrentUser', 'getUsers']),
-    ...mapActions('chat', ['getConversations']),
+    ...mapActions('user', ['getCurrentUser']),
     openChat(data) {
       this.chatOpened = true;
       if (data.type === 'new') {

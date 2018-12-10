@@ -15,12 +15,15 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 import UserItem from '../components/UserItem.vue';
 
 export default {
   name: 'user-list',
+  mounted() {
+     this.getUsers();
+  },
   components: {
     UserItem
   },
@@ -28,6 +31,7 @@ export default {
     ...mapGetters('user', ['filteredUsers'])
   },
   methods: {
+    ...mapActions('user', ['getUsers']),
     newConversation(id) {
       this.$emit('chat:open', { userId: id, type: 'new' });
     }
